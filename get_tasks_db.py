@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import time
 import re
 import random
-from get_tags import payload, headers
+from prework_with_tags.get_tags import payload, headers
 
 
 tags = {'Data Structures': {'Data Structures', 'Heaps', 'Priority Queues', 'Sets', 'Queues', 'Stacks', 'Hash Table',
