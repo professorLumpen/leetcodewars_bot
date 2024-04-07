@@ -44,10 +44,8 @@ def write_tags_on_file(tags, params):
 
 def get_tags_by_urls(urls_param, heads, pay_data):
     for params in urls_param.values():
-        if params['payload']:
-            response = requests.get(params['url'] + params['postfix'], headers=heads, data=pay_data)
-        else:
-            response = requests.get(params['url'] + params['postfix'], headers=heads)
+        pay_data = pay_data if params['payload'] else ''
+        response = requests.get(params['url'] + params['postfix'], headers=heads, data=pay_data)
         if response.status_code == 200:
             tags = get_tags_from_response(response, params)
             write_tags_on_file(tags, params)
