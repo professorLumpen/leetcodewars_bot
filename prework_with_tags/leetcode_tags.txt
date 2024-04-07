@@ -1,15 +1,15 @@
 Array
 String
 Hash Table
-Dynamic Programming
 Math
+Dynamic Programming
 Sorting
 Greedy
 Depth-First Search
 Database
 Binary Search
-Tree
 Breadth-First Search
+Tree
 Matrix
 Bit Manipulation
 Two Pointers
@@ -24,8 +24,8 @@ Counting
 Sliding Window
 Backtracking
 Union Find
-Linked List
 Enumeration
+Linked List
 Ordered Set
 Monotonic Stack
 Trie
@@ -34,12 +34,12 @@ Divide and Conquer
 Recursion
 Bitmask
 Queue
-Segment Tree
 Binary Search Tree
+Segment Tree
 Memoization
 Geometry
-Binary Indexed Tree
 Hash Function
+Binary Indexed Tree
 Topological Sort
 String Matching
 Combinatorics
