@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import json
+from typing import Dict, List
 
 
 urls = {'lc': {'name': 'leetcode',
@@ -20,7 +21,7 @@ with open('payload.txt', 'r') as data_file:
     payload = data_file.read()
 
 
-def get_tags_from_response(response, params):
+def get_tags_from_response(response: requests.models.Response, params: Dict[str, str]) -> List[str]:
     soup = BeautifulSoup(response.content, 'lxml')
     tags = []
     if params['name'] == 'leetcode':
@@ -36,13 +37,13 @@ def get_tags_from_response(response, params):
     return tags
 
 
-def write_tags_on_file(tags, params):
+def write_tags_on_file(tags: List[str], params: Dict[str, str]) -> None:
     with open(f'{params["name"]}_tags.txt', 'w') as file:
         for elem in tags:
             file.write(elem + '\n')
 
 
-def get_tags_by_urls(urls_param, heads, pay_data):
+def get_tags_by_urls(urls_param: Dict[str, Dict[str, str]], heads: Dict[str, str], pay_data: str) -> None:
     for params in urls_param.values():
         pay_data = pay_data if params['payload'] else ''
         response = requests.get(params['url'] + params['postfix'], headers=heads, data=pay_data)
