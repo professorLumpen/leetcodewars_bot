@@ -16,10 +16,8 @@ difficulty_levels = {'Beginner', 'Easy', 'Medium', 'Hard'}
 
 @bot.message_handler(commands=['start', 'help'])
 def send_categories(message):
-    print(message)
     markup = ReplyKeyboardMarkup(row_width=len(tasks))
     for category in our_tasks:
-        print(category)
         item_button = KeyboardButton(category)
         markup.add(item_button)
     bot.send_message(message.chat.id, 'Choose a category: ', reply_markup=markup)
@@ -46,7 +44,6 @@ def send_subcategories(message):
     our_tasks = our_tasks[cur_category]
     markup = ReplyKeyboardMarkup(row_width=len(tasks))
     for category in our_tasks:
-        print(category)
         item_button = KeyboardButton(category)
         markup.add(item_button)
     bot.send_message(message.chat.id, 'Choose a category: ', reply_markup=markup)

@@ -1,0 +1,59 @@
+{
+    "Data Structures": {
+        "Data Structures": {},
+        "Stacks and Queues": {},
+        "Heaps": {},
+        "Sets": {},
+        "Hash Tables": {},
+        "Arrays": {},
+        "Strings": {},
+        "Linked Lists": {},
+        "Trees": {},
+        "Graphs": {}
+    },
+    "Basic Algorithms": {
+        "Dynamic Programming": {},
+        "Greedy": {},
+        "Two Pointers": {},
+        "Sliding Window": {},
+        "Divide and Conquer": {},
+        "Recursion": {},
+        "Memoization": {},
+        "Sorting": {},
+        "Searching": {},
+        "Bits": {},
+        "Logic Algorithms": {},
+        "Other Algorithms": {},
+        "Common Algorithms": {}
+    },
+    "Math": {
+        "Math": {},
+        "Algebra": {},
+        "Combinatorics": {},
+        "Geometry": {},
+        "Discrete Math": {},
+        "Probability and Statistics": {}
+    },
+    "Programming": {
+        "Functional Programming": {},
+        "Object-oriented Programming": {},
+        "Design Patterns": {},
+        "Regular Expressions": {},
+        "Threads": {},
+        "Debugging": {},
+        "Meta-Programming": {}
+    },
+    "Language Usage": {
+        "Big Data": {},
+        "Security": {},
+        "Puzzles and Graphics": {},
+        "Simulation": {},
+        "Interactive": {}
+    },
+    "Other Technologies": {
+        "Backend": {},
+        "JSON": {},
+        "Databases": {},
+        "Shell": {}
+    }
+}

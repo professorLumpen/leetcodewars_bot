@@ -1,0 +1,256 @@
+{
+    "Data Structures": {
+        "Data Structures": [
+            "Data Structures"
+        ],
+        "Stacks and Queues": [
+            "Queues",
+            "Stacks",
+            "Stack",
+            "Queue",
+            "Monotonic Stack",
+            "Monotonic Queue"
+        ],
+        "Heaps": [
+            "Heaps",
+            "Priority Queues",
+            "Heap (Priority Queue)"
+        ],
+        "Sets": [
+            "Sets",
+            "Ordered Set"
+        ],
+        "Hash Tables": [
+            "Hash Table",
+            "Hash Function"
+        ],
+        "Arrays": [
+            "Arrays",
+            "Lists",
+            "Array",
+            "Prefix Sum",
+            "Suffix Array"
+        ],
+        "Strings": [
+            "Strings",
+            "String",
+            "String Matching",
+            "Trie",
+            "Rolling Hash"
+        ],
+        "Linked Lists": [
+            "Linked Lists",
+            "Linked List",
+            "Doubly-Linked List"
+        ],
+        "Trees": [
+            "Trees",
+            "Binary Search Trees",
+            "Binary Trees",
+            "Tree",
+            "Binary Tree",
+            "Segment Tree",
+            "Binary Search Tree",
+            "Binary Indexed Tree",
+            "Minimum Spanning Tree"
+        ],
+        "Graphs": [
+            "Graph Theory",
+            "Graphs",
+            "Depth-First Search",
+            "Breadth-First Search",
+            "Graph",
+            "Shortest Path",
+            "Topological Sort",
+            "Strongly Connected Component",
+            "Biconnected Component",
+            "Eulerian Circuit"
+        ]
+    },
+    "Basic Algorithms": {
+        "Dynamic Programming": [
+            "Dynamic Programming"
+        ],
+        "Greedy": [
+            "Greedy"
+        ],
+        "Two Pointers": [
+            "Two Pointers"
+        ],
+        "Sliding Window": [
+            "Sliding Window"
+        ],
+        "Divide and Conquer": [
+            "Divide and Conquer"
+        ],
+        "Recursion": [
+            "Recursion",
+            "Backtracking"
+        ],
+        "Memoization": [
+            "Memoization"
+        ],
+        "Sorting": [
+            "Sorting",
+            "Merge Sort",
+            "Bucket Sort",
+            "Counting Sort",
+            "Radix Sort"
+        ],
+        "Searching": [
+            "Searching",
+            "Filtering",
+            "Binary Search",
+            "Quickselect",
+            "Counting",
+            "Enumeration"
+        ],
+        "Bits": [
+            "Binary",
+            "Bits",
+            "Bit Manipulation",
+            "Bitmask"
+        ],
+        "Logic Algorithms": [
+            "Logic",
+            "Performance",
+            "Restricted"
+        ],
+        "Other Algorithms": [
+            "Date Time",
+            "Networks",
+            "Scheduling",
+            "Union Find",
+            "Rejection Sampling",
+            "Line Sweep",
+            "Reservoir Sampling"
+        ],
+        "Common Algorithms": [
+            "Algorithms",
+            "Fundamentals"
+        ]
+    },
+    "Math": {
+        "Math": [
+            "Mathematics",
+            "Math",
+            "Physics",
+            "Number Theory"
+        ],
+        "Algebra": [
+            "Algebra",
+            "Linear Algebra",
+            "Matrix"
+        ],
+        "Combinatorics": [
+            "Combinatorics",
+            "Permutations"
+        ],
+        "Geometry": [
+            "Geometry"
+        ],
+        "Discrete Math": [
+            "Set Theory"
+        ],
+        "Probability and Statistics": [
+            "Probability",
+            "Statistics",
+            "Game Theory",
+            "Probability and Statistics"
+        ]
+    },
+    "Programming": {
+        "Functional Programming": [
+            "Functional Programming"
+        ],
+        "Object-oriented Programming": [
+            "Object-oriented Programming",
+            "Metaprogramming"
+        ],
+        "Design Patterns": [
+            "Decorator",
+            "Iterators",
+            "Singleton",
+            "Design Patterns",
+            "Design",
+            "Iterator"
+        ],
+        "Regular Expressions": [
+            "Regular Expressions"
+        ],
+        "Threads": [
+            "Asynchronous",
+            "Threads",
+            "Concurrency",
+            "Data Stream"
+        ],
+        "Debugging": [
+            "Debugging",
+            "Refactoring"
+        ],
+        "Meta-Programming": [
+            "Angular",
+            "Esoteric Languages",
+            "Compilers",
+            "Interpreters",
+            "Domain Specific Languages",
+            "Language Features",
+            "State Machines",
+            "Tutorials",
+            "Randomized"
+        ]
+    },
+    "Language Usage": {
+        "Big Data": [
+            "Artificial Intelligence",
+            "Data Science",
+            "Machine Learning",
+            "NumPy",
+            "Data Frames"
+        ],
+        "Security": [
+            "Cryptography",
+            "Ciphers",
+            "Security",
+            "Parsing",
+            "Web Scraping",
+            "Unicode"
+        ],
+        "Puzzles and Graphics": [
+            "ASCII Art",
+            "Puzzles",
+            "Graphics",
+            "Image Processing"
+        ],
+        "Simulation": [
+            "Cellular Automata",
+            "Genetic Algorithms",
+            "Simulation"
+        ],
+        "Interactive": [
+            "Riddles",
+            "Game Solvers",
+            "Games",
+            "Interactive",
+            "Brainteaser"
+        ]
+    },
+    "Other Technologies": {
+        "Backend": [
+            "Backend",
+            "Flask"
+        ],
+        "JSON": [
+            "JSON"
+        ],
+        "Databases": [
+            "SQL",
+            "Databases",
+            "MongoDB",
+            "Database"
+        ],
+        "Shell": [
+            "Shell"
+        ]
+    }
+}

@@ -1,138 +1,28 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.chrome.service import Service
 import requests
 from bs4 import BeautifulSoup
+from bs4.element import Tag
 import time
 import re
 import json
+from typing import Dict, List, Set, Union, Callable
 
-
-tags = {'Data Structures': {'Data Structures': {'Data Structures'},
-                            'Stacks and Queues': {'Queues', 'Stacks', 'Stack', 'Queue', 'Monotonic Stack',
-                                                  'Monotonic Queue'},
-                            'Heaps': {'Heaps', 'Priority Queues', 'Heap (Priority Queue)'},
-                            'Sets': {'Sets', 'Ordered Set'},
-                            'Hash Tables': {'Hash Table', 'Hash Function'},
-                            'Arrays': {'Arrays', 'Lists', 'Array', 'Prefix Sum', 'Suffix Array'},
-                            'Strings': {'Strings', 'String', 'String Matching', 'Trie', 'Rolling Hash'},
-                            'Linked Lists': {'Linked Lists', 'Linked List', 'Doubly-Linked List'},
-                            'Trees': {'Trees', 'Binary Search Trees', 'Binary Trees', 'Tree', 'Binary Tree',
-                                      'Segment Tree',
-                                      'Binary Search Tree', 'Binary Indexed Tree', 'Minimum Spanning Tree'},
-                            'Graphs': {'Graph Theory', 'Graphs', 'Depth-First Search', 'Breadth-First Search', 'Graph',
-                                       'Shortest Path',
-                                       'Topological Sort', 'Strongly Connected Component', 'Biconnected Component',
-                                       'Eulerian Circuit'}
-                            },
-        'Basic Algorithms': {'Dynamic Programming': {'Dynamic Programming'},
-                             'Greedy': {'Greedy'},
-                             'Two Pointers': {'Two Pointers'},
-                             'Sliding Window': {'Sliding Window'},
-                             'Divide and Conquer': {'Divide and Conquer'},
-                             'Recursion': {'Recursion', 'Backtracking'},
-                             'Memoization': {'Memoization'},
-                             'Sorting': {'Sorting', 'Merge Sort', 'Bucket Sort', 'Counting Sort', 'Radix Sort'},
-                             'Searching': {'Searching', 'Filtering', 'Binary Search', 'Quickselect', 'Counting',
-                                           'Enumeration'},
-                             'Bits': {'Binary', 'Bits', 'Bit Manipulation', 'Bitmask'},
-                             'Logic Algorithms': {'Logic', 'Performance', 'Restricted'},
-                             'Other Algorithms': {'Date Time', 'Networks', 'Scheduling', 'Union Find',
-                                                  'Rejection Sampling', 'Line Sweep', 'Reservoir Sampling'},
-                             'Common Algorithms': {'Algorithms', 'Fundamentals'}
-                             },
-        'Math': {'Math': {'Mathematics', 'Math', 'Physics', 'Number Theory'},
-                 'Algebra': {'Algebra', 'Linear Algebra', 'Matrix'},
-                 'Combinatorics': {'Combinatorics', 'Permutations'},
-                 'Geometry': {'Geometry'},
-                 'Discrete Math': {'Set Theory'},
-                 'Probability and Statistics': {'Probability', 'Statistics', 'Game Theory',
-                                                'Probability and Statistics'}},
-
-        'Programming': {'Functional Programming': {'Functional Programming'},
-                        'Object-oriented Programming': {'Object-oriented Programming', 'Metaprogramming'},
-                        'Design Patterns': {'Decorator', 'Iterators', 'Singleton', 'Design Patterns', 'Design',
-                                            'Iterator'},
-                        'Regular Expressions': {'Regular Expressions'},
-                        'Threads': {'Asynchronous', 'Threads', 'Concurrency', 'Data Stream'},
-                        'Debugging': {'Debugging', 'Refactoring'},
-                        'Meta-Programming': {'Angular', 'Esoteric Languages', 'Compilers', 'Interpreters',
-                                             'Domain Specific Languages', 'Language Features', 'State Machines',
-                                             'Tutorials', 'Randomized'},
-                        },
-        'Language Usage': {'Big Data': {'Artificial Intelligence', 'Data Science', 'Machine Learning', 'NumPy',
-                                        'Data Frames'},
-                           'Security': {'Cryptography', 'Ciphers', 'Security', 'Parsing', 'Web Scraping', 'Unicode'},
-                           'Puzzles and Graphics': {'ASCII Art', 'Puzzles', 'Graphics', 'Image Processing'},
-                           'Simulation': {'Cellular Automata', 'Genetic Algorithms', 'Simulation'},
-                           'Interactive': {'Riddles', 'Game Solvers', 'Games', 'Interactive', 'Brainteaser'},
-                           },
-
-        'Other Technologies': {'Backend': {'Backend', 'Flask'},
-                               'JSON': {'JSON'},
-                               'Databases': {'SQL', 'Databases', 'MongoDB', 'Database'},
-                               'Shell': {'Shell'}
-                               }}
 
 difficult_levels = {'8 kyu': 'Beginner', '7 kyu': 'Beginner', '6 kyu': 'Easy', '5 kyu': 'Easy', 'Easy': 'Easy',
                     '4 kyu': 'Medium', '3 kyu': 'Medium', 'Medium': 'Medium', '2 kyu': 'Hard', '1 kyu': 'Hard',
                     'Hard': 'Hard'}
 
-all_tasks = {'Data Structures': {'Data Structures': {},
-                                 'Stacks and Queues': {},
-                                 'Heaps': {},
-                                 'Sets': {},
-                                 'Hash Tables': {},
-                                 'Arrays': {},
-                                 'Strings': {},
-                                 'Linked Lists': {},
-                                 'Trees': {},
-                                 'Graphs': {}
-                                 },
-             'Basic Algorithms': {'Dynamic Programming': {},
-                                  'Greedy': {},
-                                  'Two Pointers': {},
-                                  'Sliding Window': {},
-                                  'Divide and Conquer': {},
-                                  'Recursion': {},
-                                  'Memoization': {},
-                                  'Sorting': {},
-                                  'Searching': {},
-                                  'Bits': {},
-                                  'Logic Algorithms': {},
-                                  'Other Algorithms': {},
-                                  'Common Algorithms': {}
-                                  },
-             'Math': {'Math': {},
-                      'Algebra': {},
-                      'Combinatorics': {},
-                      'Geometry': {},
-                      'Discrete Math': {},
-                      'Probability and Statistics': {}},
+with open('all_tags.txt', 'r') as file_tags:
+    tags = json.loads(file_tags.read())
 
-             'Programming': {'Functional Programming': {},
-                             'Object-oriented Programming': {},
-                             'Design Patterns': {},
-                             'Regular Expressions': {},
-                             'Threads': {},
-                             'Debugging': {},
-                             'Meta-Programming': {},
-                             },
-             'Language Usage': {'Big Data': {},
-                                'Security': {},
-                                'Puzzles and Graphics': {},
-                                'Simulation': {},
-                                'Interactive': {},
-                                },
-
-             'Other Technologies': {'Backend': {},
-                                    'JSON': {},
-                                    'Databases': {},
-                                    'Shell': {}
-                                    }}
+with open('tasks_blank.txt', 'r') as file:
+    all_tasks = json.loads(file.read())
 
 
-def get_one_task_leetcode(link, tasks, difficulty_level):
+def get_one_task_leetcode(link: Tag, tasks: Dict[str, Set[str]], difficulty_level: str) -> None:
     if link:
         new_task = link.find('a').get('href')
         task_url = urls['lc']['url'] + new_task[1:]
@@ -142,8 +32,9 @@ def get_one_task_leetcode(link, tasks, difficulty_level):
             tasks[difficulty_level] = {task_url}
 
 
-def get_tasks_from_leetcode(url_for_parse, tasks):
-    browser = webdriver.Chrome()
+def get_tasks_from_leetcode(url_for_parse: str, tasks: Dict[str, Set[str]]) -> None:
+    s = Service(executable_path="C:/usr/local/bin/chromedriver.exe")
+    browser = webdriver.Chrome(service=s)
     browser.get(url_for_parse)
     time.sleep(0.3)
     if browser.title == 'Page Not Found - LeetCode':
@@ -165,7 +56,7 @@ def get_tasks_from_leetcode(url_for_parse, tasks):
         get_tasks_from_leetcode(url_for_parse, tasks)
 
 
-def get_one_task_codewars(div, tasks, difficulty_level):
+def get_one_task_codewars(div: Tag, tasks: Dict[str, Set[str]], difficulty_level: str) -> None:
     link = div.find('a', href=re.compile(r'python$'))
     href = link['href']
     task_url = urls['cw']['url'] + href[1:]
@@ -175,7 +66,7 @@ def get_one_task_codewars(div, tasks, difficulty_level):
         tasks[difficulty_level] = {task_url}
 
 
-def get_tasks_from_codewars(url_for_parse, tasks):
+def get_tasks_from_codewars(url_for_parse: str, tasks: Dict[str, Set[str]]) -> None:
     response = requests.get(url_for_parse)
     soup = BeautifulSoup(response.content, 'html.parser')
     task_divs = soup.find_all('div', class_='list-item-kata')
@@ -185,7 +76,7 @@ def get_tasks_from_codewars(url_for_parse, tasks):
             get_one_task_codewars(div, tasks, difficult_levels[link.find('span').string])
 
 
-def slugify_tag(tag, site_url):
+def slugify_tag(tag: str, site_url: Dict[str, Union[str, Callable]]) -> str:
     tag = tag.replace('(', '').replace(')', '').split()
     if site_url['name'] == 'leetcode':
         return '-'.join(tag)
@@ -205,7 +96,7 @@ urls = {'lc': {'name': 'leetcode',
                }}
 
 
-def get_tasks_by_categories(site_url, subcategories):
+def get_tasks_by_category(site_url: Dict[str, Union[str, Callable]], subcategories: List[str]) -> Dict[str, Set[str]]:
     all_tasks_for_category = {}
     for category in subcategories:
         parse_url = site_url['url'] + site_url['postfix'] + slugify_tag(category, site_url)
@@ -214,7 +105,7 @@ def get_tasks_by_categories(site_url, subcategories):
     return all_tasks_for_category
 
 
-def add_to_db(category, subcategory, found_tasks):
+def add_to_db(category: str, subcategory: str, found_tasks: Dict[str, List[str]]) -> None:
     global all_tasks
     for difficulty, tasks in found_tasks.items():
         if difficulty in all_tasks[category][subcategory]:
@@ -223,24 +114,24 @@ def add_to_db(category, subcategory, found_tasks):
             all_tasks[category][subcategory][difficulty] = tasks
 
 
-def tasks_to_json(dict_tasks):
+def tasks_to_json(dict_tasks: Dict[str, Union[Set[str], List[str]]]) -> Dict[str, List[str]]:
     for difficulty, tasks in dict_tasks.items():
         dict_tasks[difficulty] = list(tasks)
     return dict_tasks
 
 
-def parse_it(current_url, all_tags):
+def parse_it(current_url: Dict[str, Union[str, Callable]], all_tags: Dict[str, Dict[str, List[str]]]) -> None:
     for category_key, category_val in all_tags.items():
         for subcategory_key, subcategory_val in category_val.items():
-            current_tasks = get_tasks_by_categories(current_url, subcategory_val)
+            current_tasks = get_tasks_by_category(current_url, subcategory_val)
             current_tasks = tasks_to_json(current_tasks)
             add_to_db(category_key, subcategory_key, current_tasks)
 
 
-def get_db_imitation(tasks):
+def get_db_imitation(tasks: Dict[str, Dict[str, Dict[str, List[str]]]]) -> None:
     tasks = json.dumps(tasks, indent=4)
-    with open('tasks_db.txt', 'w') as file:
-        file.write(tasks)
+    with open('tasks_db.txt', 'w') as tasks_file:
+        tasks_file.write(tasks)
 
 
 if __name__ == '__main__':
