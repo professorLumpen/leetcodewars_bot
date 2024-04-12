@@ -3,54 +3,57 @@ from telebot import TeleBot
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 from random import shuffle
 from bot_token import TOKEN
+from typing import Dict, List, Any, Optional
 
-with open('tasks_db.txt', 'r') as file:
-    tasks = json.loads(file.read())
 
+def get_tasks_from_db() -> Optional[Dict[str, Dict[str, Dict[str, List[str]]]]]:
+    with open('tasks_db.txt', 'r') as file:
+        tasks = json.loads(file.read())
+    return tasks
+
+
+all_tasks = get_tasks_from_db()
 bot = TeleBot(TOKEN)
-
-
-our_tasks = {key: item for key, item in tasks.items()}
 difficulty_levels = {'Beginner', 'Easy', 'Medium', 'Hard'}
 
 
 @bot.message_handler(commands=['start', 'help'])
-def send_categories(message):
-    markup = ReplyKeyboardMarkup(row_width=len(tasks))
-    for category in our_tasks:
+def send_categories(message: Any) -> None:
+    markup = ReplyKeyboardMarkup(row_width=len(all_tasks))
+    for category in all_tasks:
         item_button = KeyboardButton(category)
         markup.add(item_button)
     bot.send_message(message.chat.id, 'Choose a category: ', reply_markup=markup)
 
 
 @bot.message_handler(func=lambda message: message.text in difficulty_levels)
-def send_chosen_tasks(message):
-    global our_tasks
+def send_chosen_tasks(message: Any) -> None:
+    global all_tasks
     cur_category = message.text
-    our_tasks = our_tasks[cur_category]
-    shuffle(our_tasks)
-    for task in our_tasks[:3]:
+    all_tasks = all_tasks[cur_category]
+    shuffle(all_tasks)
+    for task in all_tasks[:3]:
         bot.send_message(message.chat.id, task)
-    our_tasks = {key: item for key, item in tasks.items()}
+    all_tasks = get_tasks_from_db()
     markup = ReplyKeyboardMarkup(row_width=1)
     markup.add(KeyboardButton('/start'))
     bot.send_message(message.chat.id, 'Do you wanna start new session?', reply_markup=markup)
 
 
-@bot.message_handler(func=lambda message: message.text in our_tasks)
-def send_subcategories(message):
-    global our_tasks
+@bot.message_handler(func=lambda message: message.text in all_tasks)
+def send_subcategories(message: Any) -> None:
+    global all_tasks
     cur_category = message.text
-    our_tasks = our_tasks[cur_category]
-    markup = ReplyKeyboardMarkup(row_width=len(tasks))
-    for category in our_tasks:
+    all_tasks = all_tasks[cur_category]
+    markup = ReplyKeyboardMarkup(row_width=len(all_tasks))
+    for category in all_tasks:
         item_button = KeyboardButton(category)
         markup.add(item_button)
     bot.send_message(message.chat.id, 'Choose a category: ', reply_markup=markup)
 
 
 @bot.message_handler(func=lambda message: True)
-def send_subcategories(message):
+def send_subcategories(message: Any) -> None:
     bot.reply_to(message, 'I dont know :c')
 
 
